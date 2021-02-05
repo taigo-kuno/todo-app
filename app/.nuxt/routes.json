@@ -1,0 +1,20 @@
+[
+  {
+    "name": "hello",
+    "path": "/hello",
+    "component": "/app/pages/hello.vue",
+    "chunkName": "pages/hello"
+  },
+  {
+    "name": "todo",
+    "path": "/todo",
+    "component": "/app/pages/todo.vue",
+    "chunkName": "pages/todo"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/app/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
