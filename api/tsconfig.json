@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist",
+      "sourceMap": true,
+      "module": "CommonJS",
+      "target": "es5",
+      "moduleResolution": "node",
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true
+  },
+  "include": [
+      "./src/**/*"
+  ]
+}
