@@ -3,7 +3,7 @@ import { JsonController, Param, Body, Get, Post, Put, Delete } from 'routing-con
 // モデルの代わりだと思って下さい。サンプル用。
 type User = { name: string; age: number }
 // DBの変わりだと思ってください。サンプル用。
-const users = [{ name: 'hoge', age: 33 }, { name: 'fuga', age: 28 }, { name: 'piyo', age: 27 }]
+const users = [{ name: 'hoge', age: 83 }, { name: 'fuga', age: 28 }, { name: 'piyo', age: 27 }]
 
 @JsonController('/api/v1/users')
 export class UserController {

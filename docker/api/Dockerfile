@@ -8,7 +8,8 @@ WORKDIR $APP_ROOT
 # package*.jsonだけを先に個別コピーすることで、パッケージ変更時は`RUN npm install`が走るが
 # それ以外のファイル変更時は同コマンドにはキャッシュ利用で飛ばされるため、ビルド時間を短縮できる。
 #COPY ../../api/package*.json $APP_ROOT
-RUN npm install
+RUN npm install && 
+  
 
-# その他ファイルをコピー。
+# その他ファイルをコピー。docker-composeファイルで同期
 #COPY ../../api/ $APP_ROOT
