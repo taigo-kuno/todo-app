@@ -1,10 +1,10 @@
 [
   {
-    "name": "fetchUser2",
-    "path": "/fetchUser2",
-    "component": "/app/pages/fetchUser2.vue",
-    "chunkName": "pages/fetchUser2",
-    "_name": "_b4c33fd2"
+    "name": "todo",
+    "path": "/todo",
+    "component": "/app/pages/todo.vue",
+    "chunkName": "pages/todo",
+    "_name": "_42205e30"
   },
   {
     "name": "index",
