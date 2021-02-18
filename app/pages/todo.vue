@@ -21,8 +21,12 @@
 </div>
 </template>
 
-<script>
-export default {
+
+
+<script lang='ts'>
+import Vue from 'vue'
+
+export default Vue.extend({
   data() {
     return {
       serverURL: 'http://api_container:3000/tests',
@@ -49,7 +53,7 @@ export default {
       this.todos = await this.$axios.$get(this.localURL);
     },
     
-    async delTodo(id){
+    async delTodo(id:string){
       await this.$axios.$delete(this.localURL + `/${id}`);
       this.todos = await this.$axios.$get(this.localURL);
     }
@@ -58,5 +62,5 @@ export default {
   async fetch() {
     this.todos =  await this.$axios.$get(this.serverURL);
   }
-}
+})
 </script>
