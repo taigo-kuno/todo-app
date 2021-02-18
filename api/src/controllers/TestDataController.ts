@@ -1,12 +1,8 @@
 import { JsonController, Param, Body, Get, Post, Put, Delete } from 'routing-controllers'
 import * as mysql from 'mysql2/promise'
 
-
 // 型定義
 type TestData = { id: number; name: string; desc: string}
-
-
-
 
 //DB接続
 async function connection() {
@@ -20,70 +16,119 @@ async function connection() {
   return connection;
 }
 
-
 //データ取得
-const result = connection().then(connection => {
-  //console.log(connection);//connection check
-  // 取得
-  const result = connection.query('SELECT * FROM test');
+// connection().then(async connection => {
+//   //console.log(connection);//connection check
+//   // queryを投げる
+//   const result = await connection.query('SELECT * FROM test');
+
+//   connection.end();
   
-  // 追加
-  //const result = connection.query("INSERT INTO test VALUES(11,'test11', 'apiコンテナから追加')");
+//   console.log('conection end');
+//   console.log(result);
+//   return result;
+// }).catch(function(e) {
+//   console.log("エラーが起きました:" + e.errno);
+//   return e
+// });
 
-  //削除
-  //const result = connection.query("delete from test where id = 11 ;");
-  connection.end();
-  
-  return result;
-}).then(function(rows) {
-  console.log("エラーが起きませんでした。")
-  
-//  console.log(rows);
-  return rows[0];
-}).catch(function(e) {
-  console.log("エラーがおきました");
-  console.log(e);
-  return e
-});
+// const res = function(num1:number, num2:number){
+//   return num1 + num2;
+// }(1, 2)
+// console.log(res)
 
 
 
-console.log(result);
-
-
-
-@JsonController('/api/v1/test')
+@JsonController('/tests')
 export class TestDataController {
   @Get('/')
   getAll() {
-　
-    return  
+    return connection().then(async connection => {
+      //console.log(connection);//connection check
+      // queryを投げる
+      const result = await connection.query('SELECT * FROM test;');
+      
+      connection.end();
+      
+      return result[0];
+    }).catch(function(e) {
+      console.log("エラーが起きました:" + e.errno);
+      return e
+    });
     
   }
 
-//   @Get('/:id')
-//   getOne(@Param('id') id: number) {
-//     return testDatas[id]
-//   }
+  @Get('/:id')
+  getOne(@Param('id') id: number) {
+    return connection().then(async connection => {
+      //console.log(connection);//connection check
+      // queryを投げる
+      const result = await connection.query(`SELECT * FROM test WHERE id = ${id};`);
+      
+      connection.end();
+      
+      return result[0];
+    }).catch(function(e) {
+      console.log("エラーが起きました:" + e.errno);
+      return e
+    });
+  }
 
-//   @Post('/')
-//   post(@Body() testData: TestData) {
-//     testDatas.push(testData)
-//     return 'ok'
-//   }
+  @Post('/')
+  post(@Body() testData: TestData) {
+    const id = testData.id;
+    const name = testData.name;
+    const desc = testData.desc ? testData.desc : "";
+    return connection().then(async connection => {
+      //console.log(connection);//connection check
+      // queryを投げる
+      const result = await connection.query(`INSERT INTO test VALUES (${id}, '${name}', '${desc}');`);
+      
+      connection.end();
+      
+      return "user created";
+    }).catch(function(e) {
+      console.log("エラーが起きました:" + e.errno);
+      return e
+    });
+    
+  }
 
-//   @Put('/:id')
-//   put(@Param('id') id: number, @Body() testData: TestData) {
-//     testDatas[id] = testData
-//     return 'ok'
-//   }
+  @Put('/:id')
+  put(@Param('id') id: number, @Body() testData: TestData) {
+    const uid = id;
+    const uname = testData.name;
+    const udesc = testData.desc ? testData.desc : "";
+    return connection().then(async connection => {
+      //console.log(connection);//connection check
+      // queryを投げる
+      const result = await connection.query(`UPDATE test SET name='${uname}', description='${udesc}' WHERE id = ${uid};`);
+      
+      connection.end();
+      
+      return "user update";
+    }).catch(function(e) {
+      console.log("エラーが起きました:" + e.errno);
+      return e
+    });
+    
+  }
 
-//   @Delete('/:id')
-//   remove(@Param('id') id: number) {
-//     testDatas.splice(id, 1)
-//     return 'ok'
-//   }
+  @Delete('/:id')
+  remove(@Param('id') id: number) {
+    return  connection().then(async connection => {
+      //console.log(connection);//connection check
+      // queryを投げる
+      const result = await connection.query(`DELETE FROM test WHERE id = ${id};`);
+      
+      connection.end();
+      
+      return "User deleted";
+    }).catch(function(e) {
+      console.log("エラーが起きました:" + e.errno);
+      return e
+    });
+  }
 }
-
 //参考
 //https://qiita.com/ucan-lab/items/36f67633bc6e8b4229dc

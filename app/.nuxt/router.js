@@ -4,8 +4,7 @@ import { normalizeURL, decode } from '@nuxt/ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _b51df350 = () => interopDefault(import('../pages/hello.vue' /* webpackChunkName: "pages/hello" */))
-const _42205e30 = () => interopDefault(import('../pages/todo.vue' /* webpackChunkName: "pages/todo" */))
+const _b4c33fd2 = () => interopDefault(import('../pages/fetchUser2.vue' /* webpackChunkName: "pages/fetchUser2" */))
 const _2dfb1658 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -25,13 +24,9 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/hello",
-    component: _b51df350,
-    name: "hello"
-  }, {
-    path: "/todo",
-    component: _42205e30,
-    name: "todo"
+    path: "/fetchUser2",
+    component: _b4c33fd2,
+    name: "fetchUser2"
   }, {
     path: "/",
     component: _2dfb1658,
