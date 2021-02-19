@@ -1,5 +1,7 @@
 node_modules/
 test/
 .nuxt/
+pages/test2.vue
+pages/test.vue
 
 

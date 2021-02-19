@@ -1,23 +1,23 @@
 <template>
 <div>
-  <p v-if="$fetchState.pending">Fetching todos...</p>
-  <p v-else-if="$fetchState.error">An error occured :(</p>
+  <!-- <p v-if="$fetchState.pending">Fetching todos...</p>
+  <p v-else-if="$fetchState.error">An error occured :(</p> -->
   <div >
     <h1>todo app</h1>
     <div class="todoInput">
-      <p>タイトルを入力してください</p>
+      <p>id:{{ this.$route.params.id }}を修正してください</p>
       <input placeholder="title" v-model="newTodoTitle">
       <input placeholder="desc" v-model="newTodoDesc">
-      <button @click="addTodo">追加</button>
+      <button @click="updateTodo">修正</button>
     </div>
     <ul>
       <li v-for="todo in todos" :key="todo.index">
-        <button @click="delTodo(todo.id)">終了</button>
         {{ todo.name }} : {{ todo.description }} 
       </li>
     </ul>
     <button @click="getTodo">reload</button>
   </div>
+  <NuxtLink to="/todo">todoListに戻る</NuxtLink>
 </div>
 </template>
 
@@ -39,8 +39,11 @@ export default Vue.extend({
   },
   methods: {
     async getTodo() {
-      this.todos = await this.$axios.$get(this.localURL)
+      //そのまま代入するとなぜかエラーが出たので一旦代入
+      const id = this.$route.params.id;
+      this.todos = await this.$axios.$get(this.localURL + `/${id}`);
     },
+
 
     async addTodo() {
       await this.$axios.$post(this.localURL,
@@ -56,12 +59,24 @@ export default Vue.extend({
     async delTodo(id:string){
       await this.$axios.$delete(this.localURL + `/${id}`);
       this.todos = await this.$axios.$get(this.localURL);
+    },
+
+    async updateTodo(){
+      const id = this.$route.params.id;
+      await this.$axios.$put(this.localURL + `/${id}`,
+        {
+          id:id,
+          name: this.newTodoTitle,
+          desc: this.newTodoDesc
+        }
+        
+      );
+      this.todos = await this.$axios.$get(this.localURL+ `/${id}`);
     }
   },
 
-  async fetch() {
-    this.todos =  await this.$axios.$get(this.serverURL);
-  },
-  fetchOnServer:false
+  // async fetch() {
+  //   this.todos =  await this.$axios.$get(this.localURL);
+  // }
 })
 </script>
