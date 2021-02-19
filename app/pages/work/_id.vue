@@ -15,7 +15,7 @@
         {{ todo.name }} : {{ todo.description }} 
       </li>
     </ul>
-    <button @click="getTodo">reload</button>
+    <button @click="getTodo">現在のデータを表示</button>
   </div>
   <NuxtLink to="/todo">todoListに戻る</NuxtLink>
 </div>

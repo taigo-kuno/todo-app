@@ -13,10 +13,11 @@
     <ul>
       <li v-for="todo in todos" :key="todo.index">
         <button @click="delTodo(todo.id)">終了</button>
-        {{ todo.name }} : {{ todo.description }} 
+        {{todo.id}}:{{ todo.name }} : {{ todo.description }} 
+        <nuxt-link v-bind:to="{name:'work-id',params:{id:todo.id}}" >修正</nuxt-link>
       </li>
     </ul>
-    <button @click="getTodo">reload</button>
+    <button @click="getTodo">再表示</button>
   </div>
 </div>
 </template>
