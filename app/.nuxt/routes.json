@@ -7,6 +7,13 @@
     "_name": "_a81b68b2"
   },
   {
+    "name": "pug",
+    "path": "/pug",
+    "component": "/app/pages/pug.vue",
+    "chunkName": "pages/pug",
+    "_name": "_650da7f0"
+  },
+  {
     "name": "test",
     "path": "/test",
     "component": "/app/pages/test.vue",

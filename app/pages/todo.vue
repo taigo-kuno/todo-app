@@ -1,25 +1,21 @@
-<template>
-<div>
-  <p v-if="$fetchState.pending">Fetching todos...</p>
-  <p v-else-if="$fetchState.error">An error occured :(</p>
-  <div >
-    <h1>todo app</h1>
-    <div class="todoInput">
-      <p>タイトルを入力してください</p>
-      <input placeholder="title" v-model="newTodoTitle">
-      <input placeholder="desc" v-model="newTodoDesc">
-      <button @click="addTodo">追加</button>
-    </div>
-    <ul>
-      <li v-for="todo in todos" :key="todo.index">
-        <button @click="delTodo(todo.id)">終了</button>
-        {{todo.id}}:{{ todo.name }} : {{ todo.description }} 
-        <nuxt-link v-bind:to="{name:'work-id',params:{id:todo.id}}" >修正</nuxt-link>
-      </li>
-    </ul>
-    <button @click="getTodo">再表示</button>
-  </div>
-</div>
+<template lang="pug">
+  div
+    div.todoApp
+      h1 todo app
+      div.todoInput
+        p タイトルを入力してください
+        input(placeholder="title" v-model="newTodoTitle")
+        input(placeholder="desc" v-model="newTodoDesc")
+        button(@click="addTodo") 追加
+      ul
+        li(v-for="todo in todos" :key="todo.index")
+          |
+          button(@click="delTodo(todo.id)") 終了 
+          | {{todo.id}}:{{ todo.name }} : {{ todo.description }}
+          nuxt-link(v-bind:to="{name:'work-id',params:{id:todo.id}}") 修正
+          
+      button(@click="getTodo") 再表示
+    iframe(src="http://localhost:8080/test" width="400" height="300")
 </template>
 
 
